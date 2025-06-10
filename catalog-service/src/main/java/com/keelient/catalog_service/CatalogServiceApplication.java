@@ -5,9 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CatalogServiceApplication {
-    // ddddd
+    
     public static void main(String[] args) {
-        SpringApplication.run(CatalogServiceApplication.class, args);
-        System.out.println("Catalog Service is running...");
+        SpringApplication.run(CatalogServiceApplication.class, args);        
     }
 }
