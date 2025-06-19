@@ -45,6 +45,6 @@ jobs:
         run: |
           ./mvnw spring-boot:build-image \
             -DskipTests \
-            -Dspring-boot.build-image.imageName=${{ secrets.DOCKERHUB_USERNAME }}/bookstore-catalog-service:latest
-          echo "XPushing the image ${{ secrets.DOCKERHUB_USERNAME }}/bookstore-catalog-service:latest to Docker Hub..."
+            -DdockerImageNameOverride=${{ secrets.DOCKERHUB_USERNAME }}/bookstore-catalog-service:latest
+          echo "Pushing the image ${{ secrets.DOCKERHUB_USERNAME }}/bookstore-catalog-service:latest to Docker Hub..."
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/bookstore-catalog-service:latest
