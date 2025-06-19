@@ -15,7 +15,7 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private static final String SERVICE_NAME = "catalog-service";
 
     @ExceptionHandler(Exception.class)
-    ProblemDetail handleUnhandledException(Exception e) {//dcfds
+    ProblemDetail handleUnhandledException(Exception e) {
         ProblemDetail problemDetail =
                 ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         problemDetail.setTitle("Internal Server Error");
