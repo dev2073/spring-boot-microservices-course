@@ -13,13 +13,13 @@ import org.testcontainers.utility.DockerImageName;
 @ConditionalOnClass(name = "org.junit.rules.TestRule")
 class TestcontainersConfiguration {
 
-	@Bean
-	@ServiceConnection
-	PostgreSQLContainer<?> postgresContainer() {
-		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:18-alpine"))
-				.withDatabaseName("postgres")
-				.withUsername("postgres")
-				.withPassword("postgres")
-				.withReuse(true); // Fondamentale per non far morire il container dopo ogni test
-	}
+    @Bean
+    @ServiceConnection
+    PostgreSQLContainer<?> postgresContainer() {
+        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:18-alpine"))
+                .withDatabaseName("postgres")
+                .withUsername("postgres")
+                .withPassword("postgres")
+                .withReuse(true); // Fondamentale per non far morire il container dopo ogni test
+    }
 }
