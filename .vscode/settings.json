@@ -1,0 +1,17 @@
+{
+  "maven.terminal.favorites": [
+    {
+      "command": "clean -U install -DskipTests",
+      "debug": false
+    }
+  ],
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "maven.terminal.customEnv": [
+    {
+      "environmentVariable": "JAVA_HOME",
+      "value": "/home/marco/.sdkman/candidates/java/current"
+    }
+  ],
+  "maven.executable.preferMavenWrapper": true,
+  "maven.terminal.useJavaHome": true
+}
