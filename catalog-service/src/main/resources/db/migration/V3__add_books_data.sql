@@ -1,0 +1,3 @@
+insert into products(code, name, description, image_url, price) values
+('P115', '1984', 'Winston Smith reins in his soul and determines to live a life of freedom in a world where Thought Police scrutinize every move.', 'https://images.gr-assets.com/books/1532714506l/40961427.jpg', 18.0),
+('P116', 'The Hobbit', 'Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling any farther than his pantry or cellar.', 'https://images.gr-assets.com/books/1546071232l/5907.jpg', 22.50);
