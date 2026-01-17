@@ -14,7 +14,7 @@ public class CatalogServiceApplication {
     }
 
     @Component
-    public static class ProfileLogger implements CommandLineRunner {
+    public static class ProfileLogger implements CommandLineRunner {// x
 
         @Value("${spring.profiles.active:default}")
         private String activeProfile;
