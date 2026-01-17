@@ -22,7 +22,7 @@ public class CatalogServiceApplication {
         @Override
         public void run(String... args) {
             System.out.println("=================================");
-            System.out.println("Active Profile: " + activeProfile);
+            System.out.println("Active Profilexx: " + activeProfile);
             System.out.println("=================================");
         }
     }
