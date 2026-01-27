@@ -44,22 +44,23 @@ import org.springframework.test.context.jdbc.Sql;
  * prefisso jdbc:tc: indica a Spring di utilizzare il driver JDBC di
  * Testcontainers.
  */
-@DataJpaTest(properties = {
-    // Do NOT use H2 in-memory database; use configured PostgreSQL Testcontainer
-    "spring.test.database.replace=none",
-})
+@DataJpaTest(
+        properties = {
+            // Do NOT use H2 in-memory database; use configured PostgreSQL Testcontainer
+            "spring.test.database.replace=none",
+        })
 @Sql(scripts = "/test-data.sql")
 @ActiveProfiles("test")
 @DisplayName("Test di Integrazione per ProductRepository")
 @Import(TestcontainersConfiguration.class)
 class ProductRepositoryTest {
 
-  @Autowired
-  private ProductRepository productRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
-  @Test
-  void shouldGetAllProducts() {
-    List<ProductEntity> products = productRepository.findAll();
-    assertThat(products).hasSize(15);
-  }
+    @Test
+    void shouldGetAllProducts() {
+        List<ProductEntity> products = productRepository.findAll();
+        assertThat(products).hasSize(15);
+    }
 }
