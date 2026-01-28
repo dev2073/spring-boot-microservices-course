@@ -5,6 +5,7 @@ import com.keelient.catalog_service.domains.Product;
 import com.keelient.catalog_service.domains.ProductMapper;
 import com.keelient.catalog_service.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class ProductService {
         pageNo = pageNo <= 1 ? 0 : pageNo - 1;
         Pageable pageable = PageRequest.of(pageNo, 10, sort);
         Page<Product> productsPage = productRepository.findAll(pageable).map(ProductMapper::toProduct);
-        return new PagedResult<Product>(
+        return new PagedResult<>(
                 productsPage.getContent(),
                 productsPage.getTotalElements(),
                 productsPage.getNumber() + 1,
@@ -40,5 +41,15 @@ public class ProductService {
                 productsPage.isLast(),
                 productsPage.hasNext(),
                 productsPage.hasPrevious());
+    }
+
+    /**
+     * Trova un prodotto tramite il suo codice.
+     *
+     * @param code il codice del prodotto da cercare
+     * @return un Optional contenente il prodotto se trovato, altrimenti Optional.empty()
+     */
+    public Optional<Product> findProductByCode(String code) {
+        return productRepository.findByCode(code).map(ProductMapper::toProduct);
     }
 }

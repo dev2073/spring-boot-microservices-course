@@ -25,14 +25,6 @@ import org.springframework.test.context.jdbc.Sql;
  *
  * <p>
  *
- *
- *
- *
- *
- *
- *
- *
- *
  * Configurazione:
  * - spring.test.database.replace=none: NON sostituire con un DB H2 in-memory.
  * Utilizzare

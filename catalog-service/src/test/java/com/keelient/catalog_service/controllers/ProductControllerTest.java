@@ -1,11 +1,14 @@
 package com.keelient.catalog_service.controllers;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 import com.keelient.catalog_service.AbstractIT;
+import com.keelient.catalog_service.domains.Product;
 import io.restassured.http.ContentType;
+import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
@@ -20,7 +23,7 @@ import org.springframework.test.context.jdbc.Sql;
  */
 @Sql(scripts = "/test-data.sql")
 @DisplayName("Test di Integrazione per ProductController")
-public class ProductControllerTest extends AbstractIT {
+class ProductControllerTest extends AbstractIT {
 
     /**
      * Test: GET /api/products should return paginated products.
@@ -62,5 +65,35 @@ public class ProductControllerTest extends AbstractIT {
                 .body("hasNext", is(true))
                 // Verify no previous page exists
                 .body("hasPrevious", is(false));
+    }
+
+    @Test
+    void shouldReturnProductByCode() {
+        Product product = given().contentType(ContentType.JSON)
+                .when()
+                .get("/api/products/{code}", "P101")
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .as(Product.class);
+
+        assertThat(product.code()).isEqualTo("P101");
+        assertThat(product.name()).isEqualTo("To Kill a Mockingbird");
+        assertThat(product.description())
+                .isEqualTo(
+                        "The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it...");
+        assertThat(product.price()).isEqualTo(new BigDecimal("45.40"));
+    }
+
+    @Test
+    void shouldReturn404WhenProductNotFound() {
+        given().contentType(ContentType.JSON)
+                .when()
+                .get("/api/products/{code}", "NON_EXISTENT")
+                .then()
+                .statusCode(404)
+                .body("title", is("Product Not Found"))
+                .body("detail", is("Product with code NON_EXISTENT not found"));
     }
 }
